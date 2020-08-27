@@ -5,17 +5,18 @@ inputs:
   pipeline: 
     description: Pipeline name and input args.
     required: true
-  python-version:
-    description: Version of Python
-    required: false
-    default: 'x'
+  # python-version:
+  #   description: Version of Python
+  #   required: false
+  #   default: 'x'
 runs:
   using: "composite"
   steps:
-    - name: Set up Python ${{ inputs.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ inputs.python-version }}
+    # NOTE: uses not supported yet for composite actions
+    # - name: Set up Python ${{ inputs.python-version }}
+    #   uses: actions/setup-python@v2
+    #   with:
+    #     python-version: ${{ inputs.python-version }}
     - name: Display Python version
       run: python -c "import sys; print(sys.version)"
       shell: bash
@@ -24,6 +25,6 @@ runs:
         python -m pip install --upgrade pip
         pip install tox
       shell: bash
-    - name: Run ${{ pipeline }} pipeline inside tox. Set tox.ini in your repo root to manage environment dependencies.
-      run: tox ${{ pipeline }}
+    - name: Run ${{ inputs.pipeline }} pipeline inside tox. Set tox.ini in your repo root to manage environment dependencies.
+      run: tox ${{ inputs.pipeline }}
       shell: bash
