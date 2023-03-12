@@ -26,5 +26,5 @@ runs:
         pip install tox
       shell: bash
     - name: Run ${{ inputs.pipeline }} pipeline inside tox. Set tox.ini in your repo root to manage environment dependencies.
-      run: tox ${{ inputs.pipeline }}
+      run: tox -- ${{ inputs.pipeline }}
       shell: bash
